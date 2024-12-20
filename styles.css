@@ -14,16 +14,13 @@ body {
     background-color: #f0f0f0;
 
     background-image: url('3.png');
-  background-size: cover;
-  background-position: center center; /* Optional: centers the image */
-  background-repeat: no-repeat; /* Prevents tiling */
-  height: 100vh; /* Ensures it covers the full viewport height */
+    background-size: cover;
+    background-position: center center; /* Optional: centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+    height: 100vh; /* Ensures it covers the full viewport height */
 }
 
-h1, h2 {
-    font-family: 'Georgia', serif;
-}
-
+/* Header */
 header {
     background: linear-gradient(135deg, rgba(255, 153, 204, 0.8), rgba(255, 111, 97, 0.8));
     color: white;
@@ -32,6 +29,7 @@ header {
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
     backdrop-filter: blur(10px);
+    animation: fadeIn 1.5s ease-out;
 }
 
 header h1 {
@@ -45,50 +43,43 @@ header p {
     color: #fff;
 }
 
-/* Small Framed Image Section */
+/* Image Section */
 #image-container {
     margin: 10px auto;
-    width: 90%;  /* Small image size */
-    max-width: 300px;  /* Maximum width for small image */
-    border: 00px solid #fabbf1; 
-    border-radius: 10px;  /* Rounded corners for the frame */
+    width: 90%;
+    max-width: 300px;
+    border: 0px solid #fabbf1;
+    border-radius: 10px;
     padding: 10px;
-    
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);  /* Soft shadow around the image */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 2s ease-out;
 }
 
 #image-container img {
     width: 90%;
     height: auto;
-    border-radius: 10px;  /* Rounded corners for the image itself */
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+#image-container img:hover {
+    transform: scale(1.1);
 }
 
 /* Countdown Timer Section */
 #countdown {
-    
-    padding: 5px;
+    padding: 3px;
     color: white;
     border-radius: 10px;
     margin-bottom: 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 2s ease-out;
 }
 
 #timer {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: bold;
-}
-
-
-#timeline h2 {
-    font-size: 2.5rem;
-    color: #ff6f61;
-    margin-bottom: 20px;
-}
-
-#timeline p {
-    font-size: 1.3rem;
-    color: #666;
-    margin-bottom: 20px;
+    animation: countdownAnimation 1s ease-out;
 }
 
 /* Hidden Message Section */
@@ -121,8 +112,9 @@ header p {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    animation: fadeInMessage 1s ease-out forwards;
 }
-
 
 /* Footer Section */
 footer {
@@ -135,9 +127,10 @@ footer {
     font-size: 1rem;
     text-align: center;
     border-top: 5px solid #ff99cc;
+    animation: slideInFooter 1s ease-out;
 }
 
-/* Animation */
+/* Keyframe Animations */
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -147,8 +140,33 @@ footer {
     }
 }
 
-header, #countdown, #timeline, #message, #wishlist {
-    animation: fadeIn 1.5s ease-out;
+@keyframes countdownAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInMessage {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFooter {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 /* Media Queries for Responsiveness */
@@ -162,7 +180,7 @@ header, #countdown, #timeline, #message, #wishlist {
     }
 
     #timer {
-        font-size: 2rem;
+        font-size: 10rem;
     }
 
     #revealButton {
@@ -198,7 +216,7 @@ header, #countdown, #timeline, #message, #wishlist {
     }
 
     #timer {
-        font-size: 1.8rem;
+        font-size: 10rem;
     }
 
     #revealButton {
