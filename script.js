@@ -23,4 +23,11 @@ document.getElementById('revealButton').addEventListener('click', function() {
 });
 
 // Initialize layout and countdown
-setInterval(timer, 1000);
+setInterval(timer, 1000); // Update the countdown every second
+
+// Ensure mobile optimization with viewport meta tag in HTML
+if (window.innerWidth <= 600) {
+    // Small screen adjustments
+    document.body.style.padding = "10px";
+    document.getElementById('timer').style.fontSize = "1.5em";
+}
