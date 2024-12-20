@@ -51,4 +51,3 @@ window.addEventListener('resize', adjustLayoutForMobile);
 // Initialize layout and countdown
 adjustLayoutForMobile();
 setInterval(updateCountdown, 1000);  // Update the countdown every second
-
