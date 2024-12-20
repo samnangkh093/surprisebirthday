@@ -1,43 +1,54 @@
-// Countdown Timer
-const countdownDate = new Date("Dec 25, 2024 00:00:00").getTime(); // Set your target date
-
-const timerElement = document.getElementById("timer");
-
+// Countdown Timer functionality
 function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = countdownDate - now;
+    const birthdayDate = new Date("2024-12-25T00:00:00"); // Your target date
+    const now = new Date();
+    const timeRemaining = birthdayDate - now;
 
-    if (distance < 0) {
-        timerElement.innerHTML = "It's Your Special Day!";
-        clearInterval(countdownInterval);
+    if (timeRemaining <= 0) {
+        document.getElementById('timer').innerHTML = "Happy Birthday!";
     } else {
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-        timerElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        document.getElementById('timer').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
 }
 
-const countdownInterval = setInterval(updateCountdown, 1000);
-
-// Reveal Hidden Message
-const revealButton = document.getElementById("revealButton");
-const hiddenMessage = document.getElementById("hiddenMessage");
-
-revealButton.addEventListener("click", () => {
-    hiddenMessage.style.display = "block";
-    revealButton.style.display = "none"; // Hide the button after click
+// Reveal hidden message on button click
+document.getElementById('revealButton').addEventListener('click', function() {
+    const hiddenMessage = document.getElementById('hiddenMessage');
+    hiddenMessage.style.display = hiddenMessage.style.display === 'none' ? 'block' : 'none';
 });
 
-// Adjust image and content dynamically for smaller screens
-window.addEventListener('resize', function () {
-    const screenWidth = window.innerWidth;
+// Function to adjust page layout based on screen size
+function adjustLayoutForMobile() {
+    const isMobile = window.innerWidth <= 768; // You can adjust this threshold as needed
 
-    if (screenWidth <= 768) {
-        document.getElementById("birthdayImage").style.width = "100%";
+    // Example of changing button styles for mobile screens
+    const revealButton = document.getElementById('revealButton');
+    if (isMobile) {
+        revealButton.style.fontSize = '1em';  // Make the button text smaller on mobile
+        revealButton.style.padding = '8px 16px';  // Adjust padding for mobile
     } else {
-        document.getElementById("birthdayImage").style.width = "80%";
+        revealButton.style.fontSize = '1.2em';  // Make the button text larger on larger screens
+        revealButton.style.padding = '10px 20px';  // Adjust padding for larger screens
     }
-});
+
+    // Adjust timer text size on mobile
+    const timerElement = document.getElementById('timer');
+    if (isMobile) {
+        timerElement.style.fontSize = '1.1em';  // Reduce font size for mobile devices
+    } else {
+        timerElement.style.fontSize = '1.5em';  // Keep larger font size on bigger screens
+    }
+}
+
+// Listen for window resize to dynamically adjust layout
+window.addEventListener('resize', adjustLayoutForMobile);
+
+// Initialize layout and countdown
+adjustLayoutForMobile();
+setInterval(updateCountdown, 1000);  // Update the countdown every second
+
