@@ -1,6 +1,6 @@
 // Countdown Timer functionality
 function updateCountdown() {
-    const birthdayDate = new Date("2024-12-25T00:00:00"); // Your target date
+    const birthdayDate = new Date("2024-12-22T00:00:00"); // Your target date
     const now = new Date();
     const timeRemaining = birthdayDate - now;
 
